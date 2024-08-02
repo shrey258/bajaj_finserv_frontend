@@ -23,7 +23,7 @@ export default function Home() {
       setMessage(null);
       const parsedJson = JSON.parse(enteredText);
       console.log("Valid JSON:", parsedJson);
-      fetch("https://bajaj-finserv-backend-ik89jyxgs-shrey258s-projects.vercel.app/bfhl", {
+      fetch("https://bajaj-finserv-backend-ivory.vercel.app/bfhl", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
