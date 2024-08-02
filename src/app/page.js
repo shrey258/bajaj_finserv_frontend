@@ -1,5 +1,15 @@
 "use client"
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+// const data = {
+//   "is_success": true,
+//   "user_id": "john_doe_17091999",
+//   "email": "john@xyz.com",
+//   "roll_number": "ABCD123",
+//   "numbers": ["1", "334", "4"],
+//   "alphabets": ["M", "B"],
+//   "highest_alphabet": ["M"]
+// }
 
 export default function Home() {
   const [enteredText, setEnteredText] = useState("");
@@ -33,6 +43,14 @@ export default function Home() {
       console.log("Invalid JSON:", error);
     }
   }
+
+  const handleDisplayChange = (e) => {
+    setResponseDataDisplay(e.target.value);
+  }
+
+  useEffect(() => {
+    console.log("Response Data display:", responseDataDisplay);
+  }, [responseDataDisplay]);
   return (
     <>
       <div className="flex flex-col justify-center items-center gap-10 mt-36">
@@ -42,15 +60,15 @@ export default function Home() {
           <button onClick={handleTextSubmit} className="bg-slate-100 text-black p-2 rounded-md font-semibold">Submit</button>
         </div>
           {message && <p className="text-red-500">{message}</p>}
-        {responseData && <select className="text-black p-2 rounded-md">
+        {responseData && <select className="text-black p-2 rounded-md" onChange={handleDisplayChange}>
           {responseData.numbers && <option onClick={() => setResponseDataDisplay("numbers")}>Numbers</option>}
           {responseData.alphabets && <option onClick={() => setResponseDataDisplay("alphabets")}>Alphabets</option>}
           {responseData.highest_alphabet && <option onClick={() => setResponseDataDisplay("hi_al")}>Highest Alphabet</option>}
         </select>}
-        {responseData && (responseDataDisplay === "numbers" ? responseData.numbers.map((number, index) => <p key={index}>{number}</p>) : 
-        responseDataDisplay === "alphabets" ? responseData.alphabets.map((alphabet, index) => <p key={index}>{alphabet}</p>) : 
+        {responseData && (responseDataDisplay === "Numbers" ? responseData.numbers.map((number, index) => <p key={index}>{number}</p>) : 
+        responseDataDisplay === "Alphabets" ? responseData.alphabets.map((alphabet, index) => <p key={index}>{alphabet}</p>) : 
         responseData.highest_alphabet.map((alphabet, index) => <p key={index}>{alphabet}</p>))}
       </div>
-    </>
-  );
+    </>
+  );
 }
