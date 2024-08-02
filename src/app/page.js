@@ -28,7 +28,7 @@ export default function Home() {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify(enteredText)
+        body: JSON.stringify(parsedJson)
       })
         .then(response => response.json())
         .then(data => {
